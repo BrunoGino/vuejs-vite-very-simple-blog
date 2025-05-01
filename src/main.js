@@ -1,15 +1,23 @@
-import { createApp } from 'vue';
-import App from './App.vue';
-import { router } from './router';
-import { createVuetify } from 'vuetify';
-import * as components from 'vuetify/components';
-import * as directives from 'vuetify/directives';
+/**
+ * main.js
+ *
+ * Bootstraps Vuetify and other plugins then mounts the App`
+ */
 
-import './style.css';
+// Plugins
+import { registerPlugins } from '@/plugins'
 
-const vuetify = createVuetify({
-    components,
-    directives
-});
+// Components
+import App from './App.vue'
 
-createApp(App).use(vuetify).use(router).mount('#app');
+// Composables
+import { createApp } from 'vue'
+
+// Styles
+import 'unfonts.css'
+
+const app = createApp(App)
+
+registerPlugins(app)
+
+app.mount('#app')
