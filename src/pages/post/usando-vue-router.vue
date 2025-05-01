@@ -1,7 +1,7 @@
 <template>
-  <Home />
+  <Post />
 </template>
 
 <script setup>
-  //
+//
 </script>
