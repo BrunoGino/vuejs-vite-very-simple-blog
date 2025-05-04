@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-defineProps({
-  post: Object,
-});
+  defineProps({
+    post: Object,
+  });
 </script>

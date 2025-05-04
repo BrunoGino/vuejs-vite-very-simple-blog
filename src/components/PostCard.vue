@@ -1,5 +1,5 @@
 <template>
-  <v-col cols="12" sm="6" md="4">
+  <v-col cols="12" md="4" sm="6">
     <v-hover v-slot="{ isHovering, props }">
       <v-card
         v-bind="props"
@@ -37,10 +37,10 @@
 </template>
 
 <script setup>
-defineProps({
-  post: {
-    type: Object,
-    required: true,
-  },
-});
+  defineProps({
+    post: {
+      type: Object,
+      required: true,
+    },
+  });
 </script>
