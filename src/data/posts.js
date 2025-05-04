@@ -1,17 +1,17 @@
 export const posts = [
   {
-      slug: 'origem-do-jaspion',
-      title: 'A Origem do Jaspion',
-      subtitle: 'Conheça a história por trás do herói metalizado.',
-      cover: 'https://i.imgur.com/F0XtAg1.jpg',
-      content: '<p>O Fantástico Jaspion surgiu nos anos 80 como um ícone dos tokusatsus japoneses. Criado pela Toei Company, sua missão era derrotar Satan Goss e restaurar o equilíbrio do universo.</p>'
+    slug: 'origem-do-jaspion',
+    title: 'A Origem do Jaspion',
+    subtitle: 'Conheça a história por trás do herói metalizado.',
+    cover: 'https://i.imgur.com/F0XtAg1.jpg',
+    content: '<p>O Fantástico Jaspion surgiu nos anos 80 como um ícone dos tokusatsus japoneses. Criado pela Toei Company, sua missão era derrotar Satan Goss e restaurar o equilíbrio do universo.</p>'
   },
   {
-      slug: 'armadura-do-jaspion',
-      title: 'Segredos da Armadura do Jaspion',
-      subtitle: 'Tecnologia e poder no traje metálico.',
-      cover: 'https://i.imgur.com/r0BGbnF.jpg',
-      content: '<p>A armadura do Jaspion é feita com tecnologia alienígena da galáxia de Edin. Ela proporciona super força, velocidade e resistência a ataques energéticos.</p>'
+    slug: 'armadura-do-jaspion',
+    title: 'Segredos da Armadura do Jaspion',
+    subtitle: 'Tecnologia e poder no traje metálico.',
+    cover: 'https://i.imgur.com/r0BGbnF.jpg',
+    content: '<p>A armadura do Jaspion é feita com tecnologia alienígena da galáxia de Edin. Ela proporciona super força, velocidade e resistência a ataques energéticos.</p>'
   },
   {
     slug: 'jaspion-vs-monstros',

@@ -6,10 +6,7 @@
         class="pa-4 rounded-xl transition-fast-in-fast-out"
         :elevation="isHovering ? 10 : 2"
       >
-        <router-link
-          class="text-decoration-none"
-          :to="`/post/${post.slug}`"
-        >
+        <router-link class="text-decoration-none" :to="`/post/${post.slug}`">
           <v-card-title class="text-h6 font-weight-bold text-primary">
             {{ post.title }}
           </v-card-title>
@@ -33,9 +30,9 @@
 
 <script setup>
 defineProps({
-    post: {
-      type: Object,
-      required: true
-    }
+  post: {
+    type: Object,
+    required: true,
+  },
 });
 </script>

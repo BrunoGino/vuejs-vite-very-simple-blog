@@ -1,4 +1,3 @@
-<!-- src/components/PostSingle.vue -->
 <template>
   <v-container>
     <v-row justify="center">
@@ -27,8 +26,8 @@
   </v-container>
 </template>
 
-  <script setup>
-  defineProps({
-    post: Object
-  });
-  </script>
+<script setup>
+defineProps({
+  post: Object,
+});
+</script>
