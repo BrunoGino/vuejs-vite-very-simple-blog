@@ -15,9 +15,12 @@ export const usePostStore = defineStore('postStore', {
     actions: {
         loadFromCache() {
             const cached = localStorage.getItem('posts');
+            const fromApi = localStorage.getItem('posts_origin') === 'api';
+
             if (cached) {
                 this.posts = JSON.parse(cached);
                 this.loaded = true;
+                this.usedFallback = !fromApi;
             }
         },
 
@@ -34,11 +37,18 @@ export const usePostStore = defineStore('postStore', {
                 const { data } = await api.get('/ask');
                 this.posts = data;
                 this.loaded = true;
+                this.usedFallback = false;
                 localStorage.setItem('posts', JSON.stringify(data));
+                localStorage.setItem('posts_origin', 'api');
+                localStorage.setItem('posts_loaded', 'true');
             } catch (err) {
                 this.posts = [...fallbackPosts];
                 this.usedFallback = true;
+                this.loaded = true;
                 this.error = 'Erro ao buscar os posts via API. Usando dados locais.';
+                localStorage.setItem('posts', JSON.stringify(this.posts));
+                localStorage.setItem('posts_origin', 'fallback');
+                localStorage.setItem('posts_loaded', 'true');
             } finally {
                 this.triedApi = true;
                 this.loading = false;
@@ -46,7 +56,7 @@ export const usePostStore = defineStore('postStore', {
         },
 
         async retryApiFetch() {
-            if (this.loaded || this.loading) return;
+            if (this.loading) return;
 
             this.loading = true;
             this.error = null;
@@ -55,12 +65,14 @@ export const usePostStore = defineStore('postStore', {
                 const { data } = await api.get('/ask');
                 this.posts = data;
                 this.loaded = true;
+                this.usedFallback = false;
                 localStorage.setItem('posts', JSON.stringify(data));
+                localStorage.setItem('posts_origin', 'api');
             } catch (err) {
-                this.error = 'Ainda não foi possível conectar à API.';
+                this.error = 'Erro ao tentar atualizar as notícias na API.';
             } finally {
                 this.loading = false;
             }
-        },
+        }
     },
 });

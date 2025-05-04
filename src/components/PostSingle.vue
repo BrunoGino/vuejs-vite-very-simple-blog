@@ -9,15 +9,6 @@
         <p class="text-subtitle-1 text-grey-darken-1 mb-4">
           {{ post.subtitle }}
         </p>
-
-        <v-img
-          v-if="post.cover"
-          aspect-ratio="16/9"
-          class="mb-6 rounded-lg"
-          cover
-          :src="post.cover"
-        />
-
         <v-sheet class="pa-6 rounded-lg" elevation="1">
           <div class="text-body-1" v-html="post.content" />
         </v-sheet>

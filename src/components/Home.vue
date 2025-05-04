@@ -15,19 +15,45 @@
     </v-row>
   </v-container>
 
+  <v-alert
+    v-if="showErrorAlert"
+    type="warning"
+    class="mt-6"
+    prominent
+    border="start"
+  >
+    {{ postStore.error }}
+  </v-alert>
+
   <v-container>
     <v-row>
       <PostCard v-for="post in postStore.posts" :key="post.slug" :post="post" />
     </v-row>
-    <v-alert
-      v-if="postStore.error"
-      type="warning"
-      class="mt-6"
-      prominent
-      border="start"
-    >
-      {{ postStore.error }}
-    </v-alert>
+
+    <v-container class="mt-4">
+      <v-row align="center" justify="start" class="gap-4">
+        <v-btn color="primary" @click="handleRetry" class="mr-2">
+          {{
+            postStore.usedFallback
+              ? "Buscar notícias atualizadas"
+              : "Atualizar notícias"
+          }}
+        </v-btn>
+
+        <v-tooltip v-if="postStore.usedFallback" location="top">
+          <template #activator="{ props }">
+            <v-icon v-bind="props" color="blue" class="cursor-pointer">
+              mdi-information
+            </v-icon>
+          </template>
+          <span>
+            Os dados exibidos são locais. Tente buscar novamente para
+            atualizá-los da API.
+          </span>
+        </v-tooltip>
+      </v-row>
+    </v-container>
+
     <v-progress-linear
       v-if="postStore.loading"
       indeterminate
@@ -38,19 +64,30 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import { usePostStore } from "@/stores/postStore";
 import PostCard from "./PostCard.vue";
 
 const postStore = usePostStore();
+const showErrorAlert = ref(false);
 
 onMounted(async () => {
   await postStore.fetchPosts();
 
-  if (postStore.usedFallback && postStore.triedApi) {
-    setTimeout(() => {
-      postStore.retryApiFetch();
-    }, 15000);
+  if (postStore.error && postStore.posts.length === 0) {
+    showErrorAlert.value = true;
+    setTimeout(() => (showErrorAlert.value = false), 5000);
   }
 });
+
+const handleRetry = async () => {
+  await postStore.retryApiFetch();
+
+  if (postStore.error && postStore.usedFallback) {
+    showErrorAlert.value = true;
+    setTimeout(() => (showErrorAlert.value = false), 5000);
+  } else {
+    showErrorAlert.value = false;
+  }
+};
 </script>
